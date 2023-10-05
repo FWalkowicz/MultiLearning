@@ -8,6 +8,7 @@ import dataConverter as dataconv
 from typing import List, Annotated
 import requests
 from torch import Tensor
+from os import mkdir
 
 #dev flags
 
@@ -26,6 +27,7 @@ model_save_path = 'usrModels/'
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Starting...")
+    mkdir("./usrModels/")
     yield
     print("Saving all loaded models...")
     manager.flushModelMemoryToFile(loaded_models)
